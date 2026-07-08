@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - LLM_PROVIDER=${LLM_PROVIDER:-groq}
+      - LLM_API_KEY=${LLM_API_KEY}
+      - LLM_MODEL=${LLM_MODEL:-llama-3.3-70b-versatile}
+    volumes:
+      - ./tests/fixtures:/app/tests/fixtures # 掛載測試資料暫存區
+    restart: unless-stopped
