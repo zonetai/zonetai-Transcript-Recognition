@@ -1,0 +1,18 @@
+# Environment variables
+.env
+.env*.local
+.env.production
+.env.development
+
+# Node dependencies
+node_modules/
+frontend/node_modules/
+
+# Next.js build output
+frontend/.next/
+frontend/out/
+
+# IDE / OS
+.DS_Store
+Thumbs.db
+*.log

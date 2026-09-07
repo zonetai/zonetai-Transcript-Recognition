@@ -17,14 +17,29 @@ const pdfParse = require('pdf-parse');
  */
 export async function extractTextFromPDF(buffer: Buffer): Promise<string> {
   try {
-    // pdf-parse options (預設行為即可保留換行)
+    let pageCount = 0;
     const options = {
-      // 如果有需要特殊的排版解析，可在此覆寫 pagerender
+      pagerender: function (pageData: any) {
+        pageCount++;
+        const curPage = pageCount;
+        return pageData.getTextContent({ normalizeWhitespace: false, disableCombineTextItems: false })
+          .then(function (textContent: any) {
+            let lastY: any;
+            let text = `\n<<<PAGE_${curPage}>>>\n`;
+            for (let item of textContent.items) {
+              if (lastY === item.transform[5] || !lastY) {
+                text += item.str;
+              } else {
+                text += '\n' + item.str;
+              }
+              lastY = item.transform[5];
+            }
+            return text;
+          });
+      },
     };
     
     const data = await pdfParse(buffer, options);
-    
-    // 確保回傳的內容為純字串，且進行基本修整（不改變換行結構）
     return data.text;
   } catch (error: any) {
     console.error('Error in PDF extraction:', error);

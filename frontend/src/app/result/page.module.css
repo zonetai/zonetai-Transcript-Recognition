@@ -1,8 +1,8 @@
 .container {
-  max-width: 1200px;
+  max-width: 1560px;
   margin: 0 auto;
-  padding: 6rem 2rem 2rem 2rem; /* Add top padding to account for fixed header */
-  font-family: 'Inter', -apple-system, sans-serif;
+  padding: 6.5rem 1.5rem 3rem 1.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #1e293b;
 }
 
@@ -14,16 +14,16 @@
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
   z-index: 50;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  padding: 0.75rem 2rem;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 .headerInner {
-  max-width: 1200px;
+  max-width: 1560px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -34,56 +34,62 @@
 .logoContainer {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 .logo {
-  height: 48px;
+  height: 42px;
   width: auto;
 }
 
 .title {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #0f172a;
   margin: 0;
 }
 
 .actions {
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
 .primaryBtn {
   background: #1a4c54;
   color: white;
   border: none;
-  padding: 0.6rem 1.2rem;
+  padding: 0.55rem 1.2rem;
   border-radius: 8px;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 0.92rem;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 12px rgba(26, 76, 84, 0.15);
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 12px rgba(26, 76, 84, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .primaryBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(26, 76, 84, 0.25);
+  box-shadow: 0 6px 16px rgba(26, 76, 84, 0.3);
 }
 
 .secondaryBtn {
-  background: #f0f0f0;
-  color: #444;
-  border: 1px solid #ddd;
-  padding: 0.6rem 1.2rem;
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 0.55rem 1.1rem;
   border-radius: 8px;
   font-weight: 500;
+  font-size: 0.92rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.15s;
 }
 
 .secondaryBtn:hover {
-  background: #e4e4e4;
+  background: #f8fafc;
+  border-color: #94a3b8;
 }
 
 .content {
@@ -92,25 +98,494 @@
   gap: 1.5rem;
 }
 
+/* 謄本分頁標籤列 (Tabs) */
+.tabSection {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.tabHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.7rem;
+}
+
+.tabTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.totalBadge {
+  background: #f1f5f9;
+  color: #1a4c54;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+}
+
+.tabList {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.3rem;
+}
+
+.tabItem {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 200px;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.tabItem:hover {
+  border-color: #1a4c54;
+  background: #f0fdfa;
+}
+
+.tabItemActive {
+  background: #ffffff;
+  border: 2px solid #1a4c54;
+  box-shadow: 0 4px 12px rgba(26, 76, 84, 0.12);
+}
+
+.tabItemTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tabItemSub {
+  font-size: 0.8rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.categoryTag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.catTag1 {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.catTag2 {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.catTag3 {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.legalHiddenBadge {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: #64748b;
+  background: #f1f5f9;
+  border: 1px dashed #cbd5e1;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  font-style: italic;
+  white-space: nowrap;
+}
+
 .warningBanner {
-  background: #fff3cd;
-  color: #856404;
-  padding: 1rem;
-  border-left: 4px solid #ffeeba;
+  background: #fffbeb;
+  color: #92400e;
+  padding: 0.9rem 1.2rem;
+  border-left: 4px solid #f59e0b;
   border-radius: 0 8px 8px 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
+  font-size: 0.92rem;
 }
 
 .warningTitle {
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1rem;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 1.6rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.tableHeaderContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 0.8rem;
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.countTag {
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+}
+
+.headerBtnGroup {
+  display: flex;
+  gap: 0.6rem;
+}
+
+/* 網格資訊排版 */
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: #f8fafc;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #f1f5f9;
+}
+
+.infoLabel {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.infoValue {
+  font-size: 0.95rem;
+  color: #0f172a;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  word-break: break-all;
+}
+
+.emptyText {
+  color: #94a3b8;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* 單元格點擊複製與微型按鈕 */
+.copyCell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+  transition: background-color 0.15s;
+}
+
+.copyCell:hover {
+  background-color: #f1f5f9;
+}
+
+.copyIconBtn {
+  opacity: 0.35;
+  color: #64748b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.15rem 0.25rem;
+  border-radius: 4px;
+  transition: opacity 0.15s, background-color 0.15s, color 0.15s;
+}
+
+.copyCell:hover .copyIconBtn {
+  opacity: 1;
+  color: #0f172a;
+  background-color: #e2e8f0;
+}
+
+/* 分子 / 分母 上下兩個欄位設計 */
+.shareContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.shareMainText {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 0.95rem;
+}
+
+.fractionBox {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #ffffff;
+  overflow: hidden;
+  width: fit-content;
+  min-width: 100px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.fractionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  gap: 0.5rem;
+}
+
+.fractionRow:hover {
+  background-color: #f1f5f9;
+}
+
+.fractionRow:first-child {
+  border-bottom: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+}
+
+.fractionLabel {
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.fractionNumber {
+  color: #1e293b;
+  font-weight: 700;
+  font-family: monospace;
+  font-size: 0.88rem;
+}
+
+.fractionCopyIcon {
+  color: #94a3b8;
+  opacity: 0.5;
+  transition: opacity 0.15s, color 0.15s;
+}
+
+.fractionRow:hover .fractionCopyIcon {
+  opacity: 1;
+  color: #0f172a;
+}
+
+.batchCopyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #f8fafc;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.batchCopyBtn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+/* 大表格排版 */
+.tableWrapper {
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.dataTable th, .dataTable td {
+  padding: 0.65rem 0.85rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.dataTable th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 700;
+  font-size: 0.85rem;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-bottom: 2px solid #cbd5e1;
+}
+
+.dataTable tr:hover td {
+  background: #f8fafc;
+}
+
+/* 前次移轉與歷次取得獨立子表格 (完整正常列出，具備垂直捲軸) */
+.trancheSubTableWrapper {
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #ffffff;
+  min-width: 380px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.trancheSubTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.trancheSubTable th {
+  background: #f1f5f9;
+  color: #334155;
+  padding: 0.35rem 0.5rem;
+  font-weight: 700;
+  border-bottom: 1px solid #cbd5e1;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.trancheSubTable td {
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  border-right: 1px solid #f8fafc;
+  vertical-align: middle;
+}
+
+.trancheSubTable tr:hover td {
+  background: #eff6ff;
+}
+
+.fractionCellInline {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: monospace;
+}
+
+.numBadge {
+  background: #f1f5f9;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+  transition: all 0.15s;
+}
+
+.numBadge:hover {
+  background: #dbeafe;
+  border-color: #93c5fd;
+  color: #1d4ed8;
+}
+
+.restrictionBadge {
+  display: inline-block;
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-right: 0.3rem;
+}
+
+.trustBadge {
+  display: inline-block;
+  background: #e0e7ff;
+  color: #3730a3;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-right: 0.3rem;
+}
+
+.iconBtn {
+  background: white;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.15s;
+}
+
+.iconBtn:hover {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #94a3b8;
 }
 
 .viewToggle {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.4rem;
   background: #f1f5f9;
   padding: 0.3rem;
   border-radius: 8px;
@@ -120,12 +595,12 @@
 .toggleBtn {
   background: transparent;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.9rem;
   border-radius: 6px;
   font-weight: 500;
   color: #64748b;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.15s;
 }
 
 .toggleBtn.active {
@@ -134,64 +609,22 @@
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.card {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
+.jsonViewer {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 
-.cardTitle {
+.emptyState {
+  text-align: center;
   font-size: 1.2rem;
-  font-weight: 600;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  color: #334155;
-  border-bottom: 2px solid #e2e8f0;
-  padding-bottom: 0.5rem;
-}
-
-.infoGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.infoItem {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.infoLabel {
-  font-size: 0.85rem;
   color: #64748b;
-  font-weight: 500;
-}
-
-.infoValue {
-  font-size: 1rem;
-  color: #0f172a;
-  font-weight: 600;
-  display: inline-block;
-  padding: 0.2rem 0;
-}
-
-.copyable {
-  cursor: pointer;
-  transition: background-color 0.2s, outline 0.2s;
-  border-radius: 4px;
-  position: relative;
-}
-
-.copyable:hover {
-  background-color: #f1f5f9;
-  outline: 2px solid #e2e8f0;
-}
-
-.copyable:active {
-  background-color: #e2e8f0;
+  padding: 5rem 2rem;
 }
 
 .toast {
@@ -199,15 +632,15 @@
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  background: #1e293b;
+  background: #0f172a;
   color: white;
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem 1.6rem;
   border-radius: 8px;
   font-size: 0.95rem;
   font-weight: 500;
   z-index: 100;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  animation: slideUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @keyframes slideUp {
@@ -215,90 +648,238 @@
   100% { transform: translate(-50%, 0); opacity: 1; }
 }
 
-.tableWrapper {
-  overflow-x: auto;
+/* 雙欄左右對照模式 */
+.containerSplit {
+  max-width: 100% !important;
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+  display: grid !important;
+  grid-template-columns: minmax(420px, 45%) 1fr !important;
+  gap: 1.5rem !important;
+  align-items: start !important;
 }
 
-.dataTable {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.95rem;
-  user-select: text;
+.pdfPane {
+  position: sticky;
+  top: 5.5rem;
+  height: calc(100vh - 7rem);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
-.dataTable th, .dataTable td {
-  padding: 0.8rem 1rem;
-  text-align: left;
+.pdfPaneHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8fafc;
+  padding: 0.6rem 1rem;
   border-bottom: 1px solid #e2e8f0;
 }
 
-.dataTable th {
-  background: #f8fafc;
-  color: #475569;
-  font-weight: 600;
-}
-
-.dataTable tr:hover {
-  background: #f1f5f9;
-}
-
-.jsonViewer {
-  background: #f8fafc;
-  color: #334155;
-  padding: 1.5rem;
-  border-radius: 8px;
-  overflow-x: auto;
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  border: 1px solid #e2e8f0;
-  margin-top: 1rem;
-}
-
-.jsonHeader, .tableHeaderContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #e2e8f0;
-  padding-bottom: 0.5rem;
-}
-
-.iconBtn {
-  background: transparent;
-  color: #64748b;
-  border: 1px solid #cbd5e1;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
+.pdfPaneTitle {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0f172a;
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  transition: all 0.2s;
 }
 
-.iconBtn:hover {
-  background: #f1f5f9;
-  color: #0f172a;
-  border-color: #94a3b8;
-}
-
-.emptyState {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #666;
-  padding: 4rem;
-}
-
-.restrictionBadge {
-  display: inline-block;
-  background: #fee2e2;
-  color: #991b1b;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
+.pdfExternalLink {
   font-size: 0.8rem;
+  color: #1a4c54;
   font-weight: 600;
-  margin-bottom: 0.2rem;
+  text-decoration: none;
+  transition: color 0.15s;
 }
+
+.pdfExternalLink:hover {
+  text-decoration: underline;
+  color: #0f766e;
+}
+
+.pdfIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #525659;
+}
+
+.contentSplit {
+  min-width: 0;
+}
+
+.splitToggleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.splitToggleBtn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.activeSplit {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-color: #7dd3fc;
+}
+
+.editCellBtn {
+  opacity: 0.25;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0.1rem 0.2rem;
+  border-radius: 4px;
+  transition: opacity 0.15s, background-color 0.15s;
+}
+
+td:hover .editCellBtn {
+  opacity: 0.9;
+  background-color: #e2e8f0;
+}
+
+/* 雙向對照：可點擊跳轉與高亮選取之資料列 */
+.clickableRow {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.clickableRow:hover td {
+  background-color: #f1f5f9 !important;
+}
+
+.focusedRow td {
+  background-color: #f0f9ff !important;
+  border-bottom-color: #bae6fd !important;
+}
+
+.focusedRow {
+  outline: 2px solid #0284c7;
+  outline-offset: -2px;
+}
+
+.orderCellContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* 頁碼定位跳轉徽章 */
+.pageJumpBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #0369a1;
+  background: #e0f2fe;
+  border: 1px solid #bae6fd;
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.pageJumpBadge:hover {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+  transform: translateY(-1px);
+}
+
+.activeBadge {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border-color: #0369a1 !important;
+  box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.35);
+}
+
+/* 左側 PDF 面板頁碼導覽控制 */
+.pdfNavControls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.pageNavGroup {
+  display: inline-flex;
+  align-items: center;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 2px;
+  gap: 3px;
+}
+
+.pageNavBtn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.72rem;
+  cursor: pointer;
+  line-height: 1;
+  color: #334155;
+  transition: all 0.15s ease;
+}
+
+.pageNavBtn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.currentPdfPageTag {
+  font-size: 0.8rem;
+  color: #1e293b;
+  padding: 0 0.4rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.currentPdfPageTag strong {
+  color: #0284c7;
+  font-weight: 700;
+}
+
+.startPageBadge {
+  font-size: 0.7rem;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 0.1rem 0.35rem;
+  margin-left: 0.35rem;
+  font-weight: 600;
+}
+
+@media (max-width: 1180px) {
+  .containerSplit {
+    grid-template-columns: 1fr !important;
+  }
+  .pdfPane {
+    position: static;
+    height: 550px;
+  }
+}
+

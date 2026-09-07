@@ -98,7 +98,7 @@ export default function Home() {
         {loading ? (
           <div className={styles.loadingContainer}>
             <div className={styles.modernSpinner}></div>
-            <div className={styles.loadingText}>謄本辨識中...</div>
+            <div className={styles.loadingText}>謄本辨識與頁面定位中...</div>
             <div className={styles.loadingBar}><div className={styles.loadingProgress}></div></div>
           </div>
         ) : (

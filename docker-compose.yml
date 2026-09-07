@@ -13,5 +13,5 @@ services:
       - LLM_API_KEY=${LLM_API_KEY}
       - LLM_MODEL=${LLM_MODEL:-llama-3.3-70b-versatile}
     volumes:
-      - ./tests/fixtures:/app/tests/fixtures # 掛載測試資料暫存區
+      - ./frontend/tests/fixtures:/app/tests/fixtures # 掛載測試資料暫存區
     restart: unless-stopped
