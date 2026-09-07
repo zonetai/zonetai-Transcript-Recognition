@@ -75,15 +75,15 @@ export default function Home() {
 
       if (!res.ok) {
         let errMessage = '伺服器解析失敗';
+        const rawText = await res.text().catch(() => '');
         try {
-          const errData = await res.json();
+          const errData = JSON.parse(rawText);
           errMessage = errData.error || errMessage;
         } catch {
-          const rawText = await res.text();
-          if (res.status === 413 || rawText.includes('Entity Too Large') || rawText.includes('too large')) {
-            errMessage = '檔案過大（超過伺服器單次請求限制 4.5MB），請選擇較小檔案，或部署於支援 Docker 大檔之伺服器 (如 Zeabur)。';
-          } else if (res.status === 504 || rawText.includes('Timeout')) {
-            errMessage = '伺服器處理逾時，請稍後再試。';
+          if (res.status === 413 || rawText.includes('FUNCTION_PAYLOAD_TOO_LARGE') || rawText.includes('Entity Too Large') || rawText.includes('too large')) {
+            errMessage = '檔案過大（超過 Vercel 限制 4.5MB）。本件第三類謄本為 29MB~73MB 之高解析純掃描影像，請改用支援 Docker 的平台（如 Zeabur）部署或於本機運行。';
+          } else if (res.status === 504 || rawText.includes('Timeout') || rawText.includes('FUNCTION_INVOCATION_TIMEOUT')) {
+            errMessage = '伺服器處理逾時（超過 Vercel 免費版 10~15 秒限制），請部署於支援容器運算之伺服器。';
           } else {
             errMessage = rawText || `伺服器回應錯誤 (${res.status})`;
           }
