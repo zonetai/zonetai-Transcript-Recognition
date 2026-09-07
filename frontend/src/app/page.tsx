@@ -56,6 +56,14 @@ export default function Home() {
     setLoading(true);
     setError(null);
 
+    // 1. 同步將原始 PDF 存入本機瀏覽器 IndexedDB，確保任何環境皆可 0 延遲即時預覽對照
+    try {
+      const { storeClientPdf } = await import('@/lib/client-pdf-store');
+      await storeClientPdf(file);
+    } catch (e) {
+      console.warn('Could not store PDF in IndexedDB:', e);
+    }
+
     const formData = new FormData();
     formData.append('file', file);
 
@@ -66,8 +74,21 @@ export default function Home() {
       });
 
       if (!res.ok) {
-        const errData = await res.json();
-        throw new Error(errData.error || '伺服器解析失敗');
+        let errMessage = '伺服器解析失敗';
+        try {
+          const errData = await res.json();
+          errMessage = errData.error || errMessage;
+        } catch {
+          const rawText = await res.text();
+          if (res.status === 413 || rawText.includes('Entity Too Large') || rawText.includes('too large')) {
+            errMessage = '檔案過大（超過伺服器單次請求限制 4.5MB），請選擇較小檔案，或部署於支援 Docker 大檔之伺服器 (如 Zeabur)。';
+          } else if (res.status === 504 || rawText.includes('Timeout')) {
+            errMessage = '伺服器處理逾時，請稍後再試。';
+          } else {
+            errMessage = rawText || `伺服器回應錯誤 (${res.status})`;
+          }
+        }
+        throw new Error(errMessage);
       }
 
       const data = await res.json();

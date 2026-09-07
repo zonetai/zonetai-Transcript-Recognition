@@ -71,12 +71,27 @@ export default function ResultPage() {
   const [viewMode, setViewMode] = useState<'table' | 'json'>('table');
   const [toast, setToast] = useState<string | null>(null);
   const [pdfId, setPdfId] = useState<string | null>(null);
+  const [pdfBlobUrl, setPdfBlobUrl] = useState<string | null>(null);
   const [showSplitView, setShowSplitView] = useState(true);
   const [currentPdfPage, setCurrentPdfPage] = useState<number>(1);
   const [activeRecordKey, setActiveRecordKey] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
+    // 1. 載入本地瀏覽器 IndexedDB 暫存之 PDF Blob (解決 Serverless 記憶體不同步與過期問題)
+    let activeUrl: string | null = null;
+    import('@/lib/client-pdf-store').then(async ({ getClientPdf }) => {
+      try {
+        const blob = await getClientPdf();
+        if (blob) {
+          activeUrl = URL.createObjectURL(blob);
+          setPdfBlobUrl(activeUrl);
+        }
+      } catch (err) {
+        console.warn('Failed to load local PDF Blob:', err);
+      }
+    });
+
     const storedData = sessionStorage.getItem('parsedResult');
     if (storedData) {
       try {
@@ -103,7 +118,16 @@ export default function ResultPage() {
     } else {
       router.push('/');
     }
+
+    return () => {
+      if (activeUrl) {
+        URL.revokeObjectURL(activeUrl);
+      }
+    };
   }, [router]);
+
+  const hasPdf = Boolean(pdfBlobUrl || pdfId);
+  const pdfSourceUrl = pdfBlobUrl || (pdfId ? `/api/pdf/${pdfId}` : null);
 
   // 跳轉至左側 PDF 指定頁面並高亮該筆紀錄
   const jumpToPage = (pageNum?: number, key?: string) => {
@@ -112,7 +136,7 @@ export default function ResultPage() {
     if (key) {
       setActiveRecordKey(key);
     }
-    if (!showSplitView && pdfId) {
+    if (!showSplitView && hasPdf) {
       setShowSplitView(true);
     }
   };
@@ -462,7 +486,7 @@ export default function ResultPage() {
             <h1 className={styles.title}>謄本解析結果</h1>
           </div>
           <div className={styles.actions}>
-            {pdfId && (
+            {hasPdf && (
               <button 
                 onClick={() => setShowSplitView(!showSplitView)} 
                 className={`${styles.splitToggleBtn} ${showSplitView ? styles.activeSplit : ''}`}
@@ -485,9 +509,9 @@ export default function ResultPage() {
         </div>
       </header>
 
-      <main className={`${styles.container} ${showSplitView && pdfId ? styles.containerSplit : ''}`}>
+      <main className={`${styles.container} ${showSplitView && hasPdf ? styles.containerSplit : ''}`}>
         {/* 左側：原始 PDF 即時串流對照面板 */}
-        {showSplitView && pdfId && (
+        {showSplitView && pdfSourceUrl && (
           <aside className={styles.pdfPane}>
             <div className={styles.pdfPaneHeader}>
               <div className={styles.pdfPaneTitle}>
@@ -514,7 +538,7 @@ export default function ResultPage() {
                   </button>
                 </div>
                 <a 
-                  href={`/api/pdf/${pdfId}#page=${currentPdfPage}`} 
+                  href={`${pdfSourceUrl}#page=${currentPdfPage}`} 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className={styles.pdfExternalLink}
@@ -525,15 +549,15 @@ export default function ResultPage() {
               </div>
             </div>
             <iframe 
-              key={currentPdfPage}
-              src={`/api/pdf/${pdfId}#page=${currentPdfPage}&view=FitH`} 
+              key={`${pdfSourceUrl}-${currentPdfPage}`}
+              src={`${pdfSourceUrl}#page=${currentPdfPage}&view=FitH`} 
               className={styles.pdfIframe}
               title="原始謄本 PDF 檢視"
             />
           </aside>
         )}
 
-        <div className={`${styles.content} ${showSplitView && pdfId ? styles.contentSplit : ''}`}>
+        <div className={`${styles.content} ${showSplitView && hasPdf ? styles.contentSplit : ''}`}>
           
           {/* 謄本分頁標籤列 */}
           <div className={styles.tabSection}>
